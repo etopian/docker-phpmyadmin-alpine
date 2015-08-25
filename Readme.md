@@ -1,6 +1,6 @@
 # docker phpmysqladmin using alpine
 
-Created to see how small it would be on alpine. I'm sure you can make it smaller though by excluding some of the php
+Created to see how small phpmyadmin would be on alpine. I'm sure you can make it smaller though by excluding some of the php
 libaries and using php's build in webserver. Currently 70.79 MB and with out nginx its 69.48 MB.
 
 Example
