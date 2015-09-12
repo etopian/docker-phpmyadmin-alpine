@@ -7,6 +7,7 @@
 
 #build files
 build.sh
+run.sh
 buildCache.sh
 
 # Information files
