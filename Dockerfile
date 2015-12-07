@@ -24,7 +24,7 @@ RUN apk -U upgrade && \
     curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz -o ${OUTPUT_FILE_NAME} && \
     TEST_FILE=$(sha1sum ${OUTPUT_FILE_NAME}) && \
     if [ "${SHA1}  ${OUTPUT_FILE_NAME}" != "${TEST_FILE}" ]; then exit -1; fi && \
-    tar -xJpf /phpmyadmin.tar.bz && \
+    tar -xvjf /phpmyadmin.tar.bz && \
     rm -rf /phpmyadmin.tar.bz && \
     mkdir -p /www/ && \
     mv /phpMyAdmin-*-all-languages /www/phpmyadmin && \
@@ -81,8 +81,7 @@ RUN apk -U upgrade && \
         -e "s/;opcache.validate_timestamps=.*/;opcache.validate_timestamps=1/" \
         -e "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" \
         /etc/php/php.ini && \
-      apk del \
-          curl xz bzip2 sed && \
+      apk del curl xz bzip2 sed && \
       rm -rf /tmp/src && \
       rm -rf /var/cache/apk/*
 
