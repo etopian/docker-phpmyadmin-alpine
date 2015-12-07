@@ -6,7 +6,7 @@ ENV LANG="en_US.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
     SHA1="8e506d30696fafdb1e3d0d259d8baf822adab75b" \
-    OUTPUT_FILE_NAME=/phpmyadmin.tar.xz \
+    OUTPUT_FILE_NAME=/phpmyadmin.tar.bz \
     PHP_MYADMIN_VERSION="4.5.2" \
     PMA_SECRET="" \
     PMA_DB="phpmyadmin" \
@@ -21,7 +21,7 @@ RUN apk -U upgrade && \
       nginx \
       curl xz sed \
       && \
-    curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.xz -o ${OUTPUT_FILE_NAME} && \
+    curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz -o ${OUTPUT_FILE_NAME} && \
     TEST_FILE=$(sha1sum ${OUTPUT_FILE_NAME}) && \
     if [ "${SHA1}  ${OUTPUT_FILE_NAME}" != "${TEST_FILE}" ]; then exit -1; fi && \
     tar -xJpf /phpmyadmin.tar.xz && \
