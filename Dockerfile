@@ -1,5 +1,5 @@
 FROM alpine
-MAINTAINER tim@haak.co
+MAINTAINER contact@etopian.com
 
 ENV LANG="en_US.UTF-8" \
     LC_ALL="C.UTF-8" \
