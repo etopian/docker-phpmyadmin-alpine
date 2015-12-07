@@ -7,12 +7,12 @@ ENV LANG="en_US.UTF-8" \
     TERM="xterm" \
     SHA1="8e506d30696fafdb1e3d0d259d8baf822adab75b" \
     OUTPUT_FILE_NAME=/phpmyadmin.tar.xz \
-    PHP_MYADMIN_VERSION="4.4.14.1" \
+    PHP_MYADMIN_VERSION="4.5.2" \
     PMA_SECRET="" \
     PMA_DB="phpmyadmin" \
     PMA_USERNAME="pma" \
     PMA_PASSWORD="password" \
-    MYSQL_HOSTNAME="mysql"
+    MYSQL_HOSTNAME="172.17.42.1"
 
 RUN apk -U upgrade && \
     apk --update add \
