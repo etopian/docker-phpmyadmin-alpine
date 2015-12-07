@@ -5,7 +5,6 @@ ENV LANG="en_US.UTF-8" \
     LC_ALL="C.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
-    SHA1="8e506d30696fafdb1e3d0d259d8baf822adab75b" \
     OUTPUT_FILE_NAME=/phpmyadmin.tar.bz \
     PHP_MYADMIN_VERSION="4.5.2" \
     PMA_SECRET="" \
