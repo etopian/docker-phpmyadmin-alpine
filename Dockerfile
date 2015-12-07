@@ -5,7 +5,7 @@ ENV LANG="en_US.UTF-8" \
     LC_ALL="C.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
-    OUTPUT_FILE_NAME=/phpmyadmin.tar.bz \
+    OUTPUT_FILE_NAME=/phpmyadmin.tar.bz2 \
     PHP_MYADMIN_VERSION="4.5.2" \
     PMA_SECRET="" \
     PMA_DB="phpmyadmin" \
@@ -19,9 +19,9 @@ RUN apk -U upgrade && \
       php-opcache  php-openssl php-pdo php-pdo_mysql php-phar php-xml php-zip php-zlib ca-certificates \
       nginx curl xz bzip2 sed
 
-RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz -o ${OUTPUT_FILE_NAME} && \
-    tar -xvjf /phpmyadmin.tar.bz && \
-    rm -rf /phpmyadmin.tar.bz && \
+RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz2 -o ${OUTPUT_FILE_NAME} && \
+    tar -xvjf /phpmyadmin.tar.bz2 && \
+    rm -rf /phpmyadmin.tar.bz2 && \
     mkdir -p /www/ && \
     mv /phpMyAdmin-*-all-languages /www/phpmyadmin && \
     chown -R nginx: /www/phpmyadmin && \
