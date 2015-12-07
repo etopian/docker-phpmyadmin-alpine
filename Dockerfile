@@ -24,8 +24,8 @@ RUN apk -U upgrade && \
     curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz -o ${OUTPUT_FILE_NAME} && \
     TEST_FILE=$(sha1sum ${OUTPUT_FILE_NAME}) && \
     if [ "${SHA1}  ${OUTPUT_FILE_NAME}" != "${TEST_FILE}" ]; then exit -1; fi && \
-    tar -xJpf /phpmyadmin.tar.xz && \
-    rm -rf /phpmyadmin.tar.xz && \
+    tar -xJpf /phpmyadmin.tar.bz && \
+    rm -rf /phpmyadmin.tar.bz && \
     mkdir -p /www/ && \
     mv /phpMyAdmin-*-all-languages /www/phpmyadmin && \
     chown -R nginx: /www/phpmyadmin && \
