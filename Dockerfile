@@ -29,8 +29,8 @@ RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyA
         -e "s/^(.+\['compress'\]\s*=\s*).+/\1 true;/" \
         -e "s/^(.+\['blowfish_secret'\]\s*=\s*).+/\1 '${PMA_SECRET}';/" \
         -e "s/^(.+\['host'\]\s*=\s*).+/\1 '${MYSQL_HOSTNAME}';/" \
-        -e "s/^.+? (\\$.+\['controluser'\]\s*=\s*).+/\1 '${PMA_USERNAME}';/" \
-        -e "s/^.+? (\\$.+\['controlpass'\]\s*=\s*).+/\1 '${PMA_PASSWORD}';/" \
+#        -e "s/^.+? (\\$.+\['controluser'\]\s*=\s*).+/\1 '${PMA_USERNAME}';/" \
+#        -e "s/^.+? (\\$.+\['controlpass'\]\s*=\s*).+/\1 '${PMA_PASSWORD}';/" \
         -e "s/^\/\/ (\\$.+pmadb)/\1/" \
         -e "s/^\/\/ (\\$.+bookmarktable)/\1/" \
         -e "s/^\/\/ (\\$.+relation)/\1/" \
