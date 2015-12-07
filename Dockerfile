@@ -11,7 +11,7 @@ ENV LANG="en_US.UTF-8" \
     PMA_DB="phpmyadmin" \
     PMA_USERNAME="pma" \
     PMA_PASSWORD="password" \
-    MYSQL_HOSTNAME="172.17.42.1"
+    MYSQL_HOSTNAME="172.17.0.1"
 
 RUN apk -U upgrade && \
     apk --update add \
