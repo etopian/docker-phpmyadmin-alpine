@@ -19,7 +19,7 @@ RUN apk -U upgrade && \
       php php-bcmath php-cli php-ctype php-curl php-fpm php-gd php-json php-mcrypt php-mysqli \
       php-opcache  php-openssl php-pdo php-pdo_mysql php-phar php-xml php-zip php-zlib ca-certificates \
       nginx \
-      curl xz sed \
+      curl xz bzip2 sed \
       && \
     curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz -o ${OUTPUT_FILE_NAME} && \
     TEST_FILE=$(sha1sum ${OUTPUT_FILE_NAME}) && \
@@ -82,7 +82,7 @@ RUN apk -U upgrade && \
         -e "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" \
         /etc/php/php.ini && \
       apk del \
-          curl xz sed && \
+          curl xz bzip2 sed && \
       rm -rf /tmp/src && \
       rm -rf /var/cache/apk/*
 
