@@ -18,12 +18,9 @@ RUN apk -U upgrade && \
     apk --update add \
       php php-bcmath php-cli php-ctype php-curl php-fpm php-gd php-json php-mcrypt php-mysqli \
       php-opcache  php-openssl php-pdo php-pdo_mysql php-phar php-xml php-zip php-zlib ca-certificates \
-      nginx \
-      curl xz bzip2 sed \
-      && \
-    curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz -o ${OUTPUT_FILE_NAME} && \
-    TEST_FILE=$(sha1sum ${OUTPUT_FILE_NAME}) && \
-    if [ "${SHA1}  ${OUTPUT_FILE_NAME}" != "${TEST_FILE}" ]; then exit -1; fi && \
+      nginx curl xz bzip2 sed
+
+RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz -o ${OUTPUT_FILE_NAME} && \
     tar -xvjf /phpmyadmin.tar.bz && \
     rm -rf /phpmyadmin.tar.bz && \
     mkdir -p /www/ && \
