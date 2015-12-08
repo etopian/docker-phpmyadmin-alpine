@@ -49,6 +49,8 @@ RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyA
         -e "s/^\/\/ (\\$.+navigationhiding)/\1/" \
         -e "s/^\/\/ (\\$.+savedsearches)/\1/" \
         -e "s/^\/\/ (\\$.+central_columns)/\1/" \
+        -e "s/^\/\/ (\\$.+designer_settings)/\1/" \
+        -e "s/^\/\/ (\\$.+export_templates)/\1/" \        
       /www/phpmyadmin/config.sample.inc.php > /www/phpmyadmin/config.inc.php && \
       sed -i \
         -e "s/upload_max_filesize = .*/upload_max_filesize = 64M/" \
