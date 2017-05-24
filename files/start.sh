@@ -20,5 +20,6 @@ sed -i -E \
 
 chown -R nginx: /data /www
 
+/usr/bin/mysql -u ${PMA_USERNAME} -p ${PMA_PASSWORD} ${PMA_DB} < /www/phpmyadmin/sql/create_tables.sql
 /usr/sbin/php-fpm7 --daemonize -c /etc/php7/php.ini -c /etc/php7/php-fpm.conf
 /usr/sbin/nginx -c /etc/nginx/nginx.conf

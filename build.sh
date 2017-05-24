@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build --rm -t timhaak/phpmyadmin-alpine .
+docker build --rm -t etopian/phpmyadmin-alpine .
