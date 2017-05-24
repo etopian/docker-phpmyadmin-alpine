@@ -15,8 +15,8 @@ ENV LANG="en_US.UTF-8" \
 
 RUN apk -U upgrade && \
     apk --update add \
-      php php5-bcmath php5-cli php5-ctype php5-curl php5-fpm php5-gd php5-json php5-mcrypt php5-mysqli \
-      php5-opcache  php5-openssl php5-pdo php5-pdo_mysql php5-phar php5-xml php5-zip php5-zlib ca-certificates \
+      php7 php7-mbstring php7-session php7-bcmath php7-cli php7-ctype php7-curl php7-fpm php7-gd php7-json php7-mcrypt php7-mysqli \
+      php7-opcache  php7-openssl php7-pdo php7-pdo_mysql php7-phar php7-xml php7-zip php7-zlib ca-certificates \
       nginx mysql-client \
       curl xz sed \
       && \
@@ -78,7 +78,7 @@ RUN apk -U upgrade && \
         -e "s/;opcache.enable_file_override=.*/opcache.enable_file_override=1/" \
         -e "s/;opcache.validate_timestamps=.*/;opcache.validate_timestamps=1/" \
         -e "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" \
-        /etc/php5/php.ini && \
+        /etc/php7/php.ini && \
       apk del \
           curl xz sed && \
       rm -rf /tmp/src && \
@@ -86,7 +86,7 @@ RUN apk -U upgrade && \
 
 ADD ./files/start.sh /start.sh
 ADD ./files/nginx.conf /etc/nginx/nginx.conf
-ADD ./files/php-fpm.conf /etc/php5/php-fpm.conf
+ADD ./files/php-fpm.conf /etc/php7/php-fpm.conf
 
 RUN chmod u+x /start.sh
 

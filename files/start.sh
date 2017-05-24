@@ -20,5 +20,5 @@ sed -i -E \
 
 chown -R nginx: /data /www
 
-/usr/bin/php-fpm5 --daemonize -c /etc/php5/php.ini -c /etc/php5/php-fpm.conf
+/usr/sbin/php-fpm7 --daemonize -c /etc/php7/php.ini -c /etc/php7/php-fpm.conf
 /usr/sbin/nginx -c /etc/nginx/nginx.conf
