@@ -1,27 +1,29 @@
-FROM alpine
+FROM alpine:edge
 MAINTAINER contact@etopian.com
 
 ENV LANG="en_US.UTF-8" \
     LC_ALL="C.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
-    OUTPUT_FILE_NAME=/phpmyadmin.tar.bz2 \
-    PHP_MYADMIN_VERSION="4.5.2" \
+    OUTPUT_FILE_NAME=/phpmyadmin.tar.xz \
+    PHP_MYADMIN_VERSION="4.7.0" \
     PMA_SECRET="" \
     PMA_DB="phpmyadmin" \
     PMA_USERNAME="pma" \
     PMA_PASSWORD="password" \
-    MYSQL_HOSTNAME="172.17.0.1"
+    MYSQL_HOSTNAME="mysql"
 
 RUN apk -U upgrade && \
     apk --update add \
-      php php-bcmath php-cli php-ctype php-curl php-fpm php-gd php-json php-mcrypt php-mysqli \
-      php-opcache  php-openssl php-pdo php-pdo_mysql php-phar php-xml php-zip php-zlib ca-certificates \
-      nginx curl xz bzip2 sed
-
-RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.bz2 -o ${OUTPUT_FILE_NAME} && \
-    tar -xvjf /phpmyadmin.tar.bz2 && \
-    rm -rf /phpmyadmin.tar.bz2 && \
+      php php5-bcmath php5-cli php5-ctype php5-curl php5-fpm php5-gd php5-json php5-mcrypt php5-mysqli \
+      php5-opcache  php5-openssl php5-pdo php5-pdo_mysql php5-phar php5-xml php5-zip php5-zlib ca-certificates \
+      nginx mysql-client \
+      curl xz sed \
+      && \
+    curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyAdmin-${PHP_MYADMIN_VERSION}-all-languages.tar.xz -o ${OUTPUT_FILE_NAME} && \
+    TEST_FILE=$(sha1sum ${OUTPUT_FILE_NAME}) && \
+    tar -xJpf /phpmyadmin.tar.xz && \
+    rm -rf /phpmyadmin.tar.xz && \
     mkdir -p /www/ && \
     mv /phpMyAdmin-*-all-languages /www/phpmyadmin && \
     chown -R nginx: /www/phpmyadmin && \
@@ -29,8 +31,8 @@ RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyA
         -e "s/^(.+\['compress'\]\s*=\s*).+/\1 true;/" \
         -e "s/^(.+\['blowfish_secret'\]\s*=\s*).+/\1 '${PMA_SECRET}';/" \
         -e "s/^(.+\['host'\]\s*=\s*).+/\1 '${MYSQL_HOSTNAME}';/" \
-#        -e "s/^.+? (\\$.+\['controluser'\]\s*=\s*).+/\1 '${PMA_USERNAME}';/" \
-#        -e "s/^.+? (\\$.+\['controlpass'\]\s*=\s*).+/\1 '${PMA_PASSWORD}';/" \
+        -e "s/^.+? (\\$.+\['controluser'\]\s*=\s*).+/\1 '${PMA_USERNAME}';/" \
+        -e "s/^.+? (\\$.+\['controlpass'\]\s*=\s*).+/\1 '${PMA_PASSWORD}';/" \
         -e "s/^\/\/ (\\$.+pmadb)/\1/" \
         -e "s/^\/\/ (\\$.+bookmarktable)/\1/" \
         -e "s/^\/\/ (\\$.+relation)/\1/" \
@@ -49,8 +51,6 @@ RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyA
         -e "s/^\/\/ (\\$.+navigationhiding)/\1/" \
         -e "s/^\/\/ (\\$.+savedsearches)/\1/" \
         -e "s/^\/\/ (\\$.+central_columns)/\1/" \
-        -e "s/^\/\/ (\\$.+designer_settings)/\1/" \
-        -e "s/^\/\/ (\\$.+export_templates)/\1/" \        
       /www/phpmyadmin/config.sample.inc.php > /www/phpmyadmin/config.inc.php && \
       sed -i \
         -e "s/upload_max_filesize = .*/upload_max_filesize = 64M/" \
@@ -78,14 +78,15 @@ RUN curl -L http://files.phpmyadmin.net/phpMyAdmin/${PHP_MYADMIN_VERSION}/phpMyA
         -e "s/;opcache.enable_file_override=.*/opcache.enable_file_override=1/" \
         -e "s/;opcache.validate_timestamps=.*/;opcache.validate_timestamps=1/" \
         -e "s/;opcache.revalidate_freq=.*/opcache.revalidate_freq=0/" \
-        /etc/php/php.ini && \
-      apk del curl xz bzip2 sed && \
+        /etc/php5/php.ini && \
+      apk del \
+          curl xz sed && \
       rm -rf /tmp/src && \
       rm -rf /var/cache/apk/*
 
 ADD ./files/start.sh /start.sh
 ADD ./files/nginx.conf /etc/nginx/nginx.conf
-ADD ./files/php-fpm.conf /etc/php/php-fpm.conf
+ADD ./files/php-fpm.conf /etc/php5/php-fpm.conf
 
 RUN chmod u+x /start.sh
 
