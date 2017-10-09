@@ -6,14 +6,14 @@ ENV LANG="en_US.UTF-8" \
     LANGUAGE="en_US.UTF-8" \
     TERM="xterm" \
     OUTPUT_FILE_NAME=/phpmyadmin.tar.xz \
-    PHP_MYADMIN_VERSION="4.7.1" \
+    PHP_MYADMIN_VERSION="4.7.4" \
     PMA_SECRET="" \
     PMA_DB="phpmyadmin" \
     PMA_USERNAME="pma" \
     PMA_PASSWORD="password" \
     MYSQL_HOSTNAME="mysql"
 
-RUN apk -U upgrade && \
+RUN apk upgrade && \
     apk --update add \
       php7 php7-mbstring php7-session php7-bcmath php7-cli php7-ctype php7-curl php7-fpm php7-gd php7-json php7-mcrypt php7-mysqli \
       php7-opcache  php7-openssl php7-pdo php7-pdo_mysql php7-phar php7-xml php7-zip php7-zlib ca-certificates \
